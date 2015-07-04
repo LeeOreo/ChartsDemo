@@ -169,7 +169,7 @@ const NSTimeInterval visibilityAnimationDuration = 0.25f;
     [self showInView:superview withTopAnchorPoint:superview.center];
 }
 
-- (void)showInView:(UIView *)superview withTopAnchorPoint:(CGPoint)anchor
+- (void)showInView:(UIView *)superview withTopAnchorPoint:(CGPoint)anchor   //this is upsidedown
 {
     [self showInView:superview withTopAnchorPoint:anchor andGap:yGapOverAnchorPoint];
 }
@@ -179,7 +179,7 @@ const NSTimeInterval visibilityAnimationDuration = 0.25f;
     [self _showInView:superview withAnchorPoint:anchor andGap:anchorGap bottomAnchor:NO];
 }
 
-- (void)showInView:(UIView *)superview withBottomAnchorPoint:(CGPoint)anchor
+- (void)showInView:(UIView *)superview withBottomAnchorPoint:(CGPoint)anchor    //this mean normal
 {
     [self showInView:superview withBottomAnchorPoint:anchor andGap:yGapOverAnchorPoint];
 }

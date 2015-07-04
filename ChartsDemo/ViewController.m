@@ -25,6 +25,8 @@
 @property (weak, nonatomic) SPBarChart * barChart2;
 @property (weak, nonatomic) IBOutlet UIView *chartsView;
 
+@property (weak, nonatomic) SPChartPopup * popup;
+
 @end
 
 @implementation ViewController
@@ -56,14 +58,54 @@
     chart.emptyChartText = @"The chart is empty.";
     
     [self.chartsView addSubview:chart];
-    
-    [chart drawChart];
 
+    [chart drawChart];
+    
+    chart.delegate = self; //叫 VC 當作 delegate 來執行 SPChartDelegate 的method
+
+}
+
+#pragma mark -
+#pragma mark Popup
+
+- (void)_dismissPopup
+{
+    if (self.popup) {
+        [self.popup dismiss];
+    }
+}
+
+#pragma mark -
+#pragma mark SPChartDelegate
+
+- (void)SPChart:(SPLineChart *)chart lineSelected:(NSInteger)lineIndex touchPoint:(CGPoint)point
+{
+    NSLog(@"Selected line %ld", (long)lineIndex);
+    
+    [self _dismissPopup];
 }
 
 - (void)SPChart:(SPBarChart *)chart barSelected:(NSInteger)barIndex barFrame:(CGRect)barFrame touchPoint:(CGPoint)touchPoint
 {
+    [self _dismissPopup];
+
     //點下bar,跑出數值出來!!!
+    
+    SPBarChartData * data = chart.datas[barIndex];
+    
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.text = [NSString stringWithFormat:@"%@", data.values[0]];
+    label.font = chart.labelFont;
+    label.textColor = [UIColor whiteColor];
+    
+    [label sizeToFit];
+    
+    SPChartPopup * popup = [[SPChartPopup alloc] initWithContentView:label];
+    [popup setPopupColor:Color4];
+    [popup sizeToFit];
+    
+    [popup showInView:chart withBottomAnchorPoint:CGPointMake(CGRectGetMidX(barFrame), CGRectGetMinY(barFrame))]; 
+    self.popup = popup;
 }
 
 - (void)didReceiveMemoryWarning {
