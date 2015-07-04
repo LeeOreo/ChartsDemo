@@ -1,0 +1,10 @@
+PODS:
+  - SPChart (0.2.1)
+
+DEPENDENCIES:
+  - SPChart (~> 0.2.1)
+
+SPEC CHECKSUMS:
+  SPChart: a65eee300b6feda20a39a0e090d554883119f204
+
+COCOAPODS: 0.37.2

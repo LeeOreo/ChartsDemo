@@ -1,0 +1,6 @@
+#include "Pods-SPChart.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/SPChart" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/SPChart"
+OTHER_LDFLAGS = ${PODS_SPCHART_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES
